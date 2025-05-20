@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { PageHeader } from "@/components/CommonComponents/PageHeader";
 import { useCreateManySlots } from "@/hooks/useSlots";
-import { SlotSize } from "@/api/slotApi";
+import { ParkingSlotSize } from "@/api/slotApi";
 import {
   Form,
   FormControl,

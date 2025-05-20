@@ -80,7 +80,7 @@ export function SlotsList() {
   const columns: Column<Slot>[] = [
     {
       header: "Number",
-      accessorKey: "slotNumber",
+      accessorKey: "parkingSlotNumber",
     },
     {
       header: "Size",

@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -7,21 +6,27 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Button } from '@/components/ui/button';
-import { Search, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import {
+  Search,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 
 export interface Column<T> {
   header: string;
-  accessorKey:any;
+  accessorKey: any;
   cell?: (item: T) => React.ReactNode;
   sortable?: boolean;
 }
@@ -38,7 +43,10 @@ interface DataTableProps<T> {
   onSearch?: (search: string) => void;
   onPageChange: (page: number) => void;
   onPageSizeChange: (pageSize: number) => void;
-  onSort?: (column: keyof T | ((row: T) => React.ReactNode), direction: 'asc' | 'desc') => void;
+  onSort?: (
+    column: keyof T | ((row: T) => React.ReactNode),
+    direction: "asc" | "desc"
+  ) => void;
   isLoading?: boolean;
 }
 
@@ -49,16 +57,18 @@ export function DataTable<T>({
   pageSize,
   pageIndex,
   searchable = true,
-  searchPlaceholder = 'Search...',
+  searchPlaceholder = "Search...",
   onSearch,
   onPageChange,
   onPageSizeChange,
   onSort,
   isLoading = false,
 }: DataTableProps<T>) {
-  const [search, setSearch] = useState('');
-  const [sortColumn, setSortColumn] = useState<keyof T | ((row: T) => React.ReactNode) | null>(null);
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+  const [search, setSearch] = useState("");
+  const [sortColumn, setSortColumn] = useState<
+    keyof T | ((row: T) => React.ReactNode) | null
+  >(null);
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   const totalPages = Math.ceil(totalItems / pageSize);
 
@@ -72,17 +82,17 @@ export function DataTable<T>({
 
   const handleSort = (column: Column<T>) => {
     if (!column.sortable || !onSort) return;
-    
+
     const key = column.accessorKey;
-    
+
     if (sortColumn === key) {
-      const newDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+      const newDirection = sortDirection === "asc" ? "desc" : "asc";
       setSortDirection(newDirection);
       onSort(key, newDirection);
     } else {
       setSortColumn(key);
-      setSortDirection('asc');
-      onSort(key, 'asc');
+      setSortDirection("asc");
+      onSort(key, "asc");
     }
   };
 
@@ -101,9 +111,7 @@ export function DataTable<T>({
           </div>
         )}
         <div className="flex items-center gap-2">
-          <p className="text-sm text-muted-foreground">
-            Rows per page
-          </p>
+          <p className="text-sm text-muted-foreground">Rows per page</p>
           <Select
             value={pageSize.toString()}
             onValueChange={(value) => onPageSizeChange(Number(value))}
@@ -121,22 +129,24 @@ export function DataTable<T>({
           </Select>
         </div>
       </div>
-      
+
       <div className="border rounded-lg overflow-hidden">
         <Table>
           <TableHeader>
             <TableRow>
               {columns.map((column, idx) => (
-                <TableHead 
-                  key={idx} 
-                  className={column.sortable ? 'cursor-pointer hover:bg-muted/50' : ''}
+                <TableHead
+                  key={idx}
+                  className={
+                    column.sortable ? "cursor-pointer hover:bg-muted/50" : ""
+                  }
                   onClick={() => handleSort(column)}
                 >
                   <div className="flex items-center gap-1">
                     {column.header}
                     {column.sortable && sortColumn === column.accessorKey && (
                       <span className="ml-1">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
+                        {sortDirection === "asc" ? "↑" : "↓"}
                       </span>
                     )}
                   </div>
@@ -147,18 +157,28 @@ export function DataTable<T>({
           <TableBody>
             {isLoading ? (
               <TableRow>
-                <TableCell colSpan={columns.length} className="text-center py-10">
+                <TableCell
+                  colSpan={columns.length}
+                  className="text-center py-10"
+                >
                   <div className="flex flex-col items-center justify-center">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                    <span className="mt-2 text-sm text-muted-foreground">Loading...</span>
+                    <span className="mt-2 text-sm text-muted-foreground">
+                      Loading...
+                    </span>
                   </div>
                 </TableCell>
               </TableRow>
             ) : data.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={columns.length} className="text-center py-10">
+                <TableCell
+                  colSpan={columns.length}
+                  className="text-center py-10"
+                >
                   <div className="flex flex-col items-center justify-center">
-                    <span className="text-sm text-muted-foreground">No data available</span>
+                    <span className="text-sm text-muted-foreground">
+                      No data available
+                    </span>
                   </div>
                 </TableCell>
               </TableRow>
@@ -169,7 +189,7 @@ export function DataTable<T>({
                     <TableCell key={colIdx}>
                       {column.cell
                         ? column.cell(row)
-                        : typeof column.accessorKey === 'function'
+                        : typeof column.accessorKey === "function"
                         ? column.accessorKey(row)
                         : (row[column.accessorKey] as React.ReactNode)}
                     </TableCell>
@@ -183,8 +203,9 @@ export function DataTable<T>({
 
       <div className="flex items-center justify-between">
         <div className="text-sm text-muted-foreground">
-          Showing {data.length ? (pageIndex * pageSize) + 1 : 0} to{' '}
-          {Math.min((pageIndex + 1) * pageSize, totalItems)} of {totalItems} entries
+          Showing {data.length ? pageIndex * pageSize + 1 : 0} to{" "}
+          {Math.min((pageIndex + 1) * pageSize, totalItems)} of {totalItems}{" "}
+          entries
         </div>
         <div className="flex items-center space-x-2">
           <Button
@@ -203,11 +224,11 @@ export function DataTable<T>({
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          
+
           <div className="text-sm text-muted-foreground">
             Page {pageIndex + 1} of {totalPages || 1}
           </div>
-          
+
           <Button
             variant="outline"
             size="icon"

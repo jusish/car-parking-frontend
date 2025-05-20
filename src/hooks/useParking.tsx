@@ -10,7 +10,7 @@ export const useParkings = (params: ParkingListParams = {}) => {
 
 export const useParking = (id: string) => {
   return useQuery({
-    queryKey: ["parking", id],
+    queryKey: ["parkings", id],
     queryFn: () => parkingApi.getParking(id),
     enabled: !!id,
   });

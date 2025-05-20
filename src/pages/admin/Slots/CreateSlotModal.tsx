@@ -135,7 +135,7 @@ export function CreateSlotModal({ isOpen, onClose }: CreateSlotModalProps) {
                       ) : parkingsData?.data?.length ? (
                         parkingsData.data.map((parking) => (
                           <SelectItem key={parking.id} value={parking.id}>
-                            {parking.name}
+                            {parking.id}
                           </SelectItem>
                         ))
                       ) : (
