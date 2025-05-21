@@ -114,8 +114,8 @@ export function BookSlot({
                             value={slotData?.data?.id}
                           >
                             <div className="flex items-center gap-2">
-                              <span>{slotData?.data?.slotNumber}</span>
-                              <SlotSizeBadge size={slotData?.data?.slotSize} />
+                              <span>{slotData?.data?.parkingSlotNumber}</span>
+                              <SlotSizeBadge size={slotData?.data?.parkingSlotSize} />
                             </div>
                           </SelectItem>
                         </SelectContent>

@@ -117,8 +117,8 @@ export function CreateOrder({
                             slotsData.data.map((slot) => (
                               <SelectItem key={slot.id} value={slot.id}>
                                 <div className="flex items-center gap-2">
-                                  <span>{slot.slotNumber}</span>
-                                  <SlotSizeBadge size={slot.slotSize} />
+                                  <span>{slot.parkingSlotNumber}</span>
+                                  <SlotSizeBadge size={slot.parkingSlotSize} />
                                 </div>
                               </SelectItem>
                             ))

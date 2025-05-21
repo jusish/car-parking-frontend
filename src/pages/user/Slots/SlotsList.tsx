@@ -33,18 +33,18 @@ export function UserSlotsList() {
     {
       header: 'Number',
       accessorKey: 'data',
-      cell: (slot) => <span>{slot.slotNumber}</span>,
+      cell: (slot) => <span>{slot.parkingSlotNumber}</span>,
     },
     {
       header: 'Size',
       accessorKey: 'data',
-      cell: (slot) => <SlotSizeBadge size={slot.slotSize} />,
+      cell: (slot) => <SlotSizeBadge size={slot.parkingSlotSize} />,
       sortable: true,
     },
     {
       header: 'Status',
       accessorKey: 'data',
-      cell: (slot) => <StatusBadge status={slot.slotStatus} />,
+      cell: (slot) => <StatusBadge status={slot.parkingSlotStatus} />,
       sortable: true,
     },
     {

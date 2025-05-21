@@ -2,7 +2,7 @@
 
 import axiosInstance from "./axiosInstance";
 
-export type ParkingSlotSize = "SMALL" | "MEDIUM" | "LARGE";
+export type ParkingSlotSize = "SMALL" | "MEDIUM" | "LARGE" | string;
 export type ParkingSlotStatus = "AVAILABLE" | "OCCUPIED" | "MAINTENANCE";
 
 export type Slot = {
@@ -43,7 +43,7 @@ export type SlotListResponse = {
 
 export type CreateSlotRequest = {
   slotSize: ParkingSlotSize;
-  parkingId: string
+  parkingId: string;
 };
 
 export type CreateManySlotRequest = {

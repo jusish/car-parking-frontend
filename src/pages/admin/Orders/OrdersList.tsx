@@ -54,7 +54,9 @@ export function OrdersList() {
       accessorKey: "slotId",
       cell: (order) => (
         <div>
-          <span className="font-semibold">{order.slot.parkingSlotNumber}</span>
+          <span className="font-semibold">
+            {order.parkingSlot.parkingSlotNumber}
+          </span>
         </div>
       ),
     },
@@ -64,7 +66,7 @@ export function OrdersList() {
       cell: (order) => (
         <div className="flex items-center gap-2">
           <Car className="h-4 w-4" />
-          <span>{order.slotVehicle?.vehiclePlateNumber ?? ""}</span>
+          <span>{order.parkingSlotVehicle?.vehiclePlateNumber ?? ""}</span>
         </div>
       ),
     },

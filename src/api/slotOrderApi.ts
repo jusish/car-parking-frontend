@@ -3,23 +3,59 @@
 import axiosInstance from "./axiosInstance";
 import { Slot } from "./slotApi";
 import { User } from "./userApi";
-import { Vehicle } from "./vehicleApi";
 
-export type SlotOrderStatus = "PENDING" | "APPROVED" | "REJECTED" | "COMPLETED";
+export type SlotOrderStatus =
+  | "PENDING"
+  | "APPROVED"
+  | "REJECTED"
+  | "COMPLETED"
+  | string;
 
-export type SlotOrder = {
+export interface ParkingSlot {
   id: string;
-  slotId: string;
-  userId: string;
+  parkingId: string;
+  parkingSlotNumber: string;
+  parkingSlotSize: string;
+  parkingSlotStatus: string;
+  createdAt: string;
+  updatedAt: string;
+  parking?: {
+    id: string;
+    maxSlots: number;
+    slotCategory: string;
+    pricePerHour: number;
+    createdAt: string;
+    updatedAt: string;
+  };
+}
+
+export interface Vehicle {
+  id: string;
   vehiclePlateNumber: string;
-  parkingSlotOrderStatus: SlotOrderStatus;
-  createdAt?: string;
-  updatedAt?: string;
-  slot?: Slot;
-  slotCustomer?: User;
-  vehicle?: Vehicle;
-  slotVehicle?: Vehicle;
-};
+  vehicleType: string;
+  vehicleColor: string;
+  vehicleBrand: string;
+  vehicleModel: string;
+  vehicleYear: number;
+  vehicleOwnerId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SlotOrder {
+  id: string;
+  parkingSlotId: string;
+  vehicleId: string;
+  parkingSlotCustomerId: string;
+  parkingSlotVehicleId: string;
+  pricePerHour: number;
+  hours: number;
+  createdAt: string;
+  updatedAt: string;
+  parkingSlotOrderStatus: "PENDING" | "APPROVED" | "REJECTED" | "COMPLETED";
+  parkingSlot: ParkingSlot;
+  parkingSlotVehicle: Vehicle;
+}
 
 export type SlotOrderResponse = {
   data: SlotOrder;

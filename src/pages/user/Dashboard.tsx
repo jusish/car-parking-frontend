@@ -28,7 +28,7 @@ export function UserDashboard() {
   useEffect(() => {
     if (slotsData?.data) {
       const available = slotsData.data.filter(
-        (slot) => slot.slotStatus === "AVAILABLE"
+        (slot) => slot.parkingSlotStatus === "AVAILABLE"
       ).length;
 
       setStats((prev) => ({
@@ -57,8 +57,8 @@ export function UserDashboard() {
       );
       const active = userOrders.filter(
         (order) =>
-          order.slotOrderStatus === "PENDING" ||
-          order.slotOrderStatus === "APPROVED"
+          order.parkingSlotOrderStatus === "PENDING" ||
+          order.parkingSlotOrderStatus === "APPROVED"
       ).length;
 
       setStats((prev) => ({
